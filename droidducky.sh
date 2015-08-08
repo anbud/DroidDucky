@@ -1,25 +1,23 @@
 #!/bin/bash
 
+# DroidDucky
+# Simple Duckyscript interpreter in Bash. Based on android-keyboard-gadget and hid-gadget-test utility.
 #
-#	DroidDucky
-#	Simple Duckyscript interpreter in Bash. Based on android-keyboard-gadget and hid-gadget-test utility.
+# Usage: droidducky.sh payload_file.txt
 #
-#	Usage: droidducky.sh payload_file.txt
+# Copyright (C) 2015 - Andrej Budinčević <andrew@hotmail.rs>
 #
-#	Copyright (C) 2015 - Andrej Budinčević <andrew@hotmail.rs>
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
 #
-#	This program is free software: you can redistribute it and/or modify
-#	it under the terms of the GNU General Public License as published by
-#	the Free Software Foundation, either version 3 of the License, or
-#	(at your option) any later version.
-#
-#	This program is distributed in the hope that it will be useful,
-#	but WITHOUT ANY WARRANTY; without even the implied warranty of
-#	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	See the
-#	GNU General Public License for more details.
-#	You should have received a copy of the GNU General Public License
-#	along with this program.	If not, see <http://www.gnu.org/licenses/>.
-#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 defdelay=0
 while IFS='' read -r line || [[ -n "$line" ]]; do
@@ -41,7 +39,7 @@ while IFS='' read -r line || [[ -n "$line" ]]; do
 				echo backquote | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
 			elif [ "${info:$i:1}" == "~" ]
 			then
-				echo tilde | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+				echo left-shift tilde | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
 			elif [ "${info:$i:1}" == "+" ]
 			then
 				echo kp-plus | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
@@ -87,6 +85,45 @@ while IFS='' read -r line || [[ -n "$line" ]]; do
 			elif [ "${info:$i:1}" == "/" ]
 			then
 				echo slash | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+			elif [ "${info:$i:1}" == "{" ]
+			then
+				echo left-shift lbracket | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+			elif [ "${info:$i:1}" == "}" ]
+			then
+				echo left-shift rbracket | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+			elif [ "${info:$i:1}" == "(" ]
+			then
+				echo left-shift 9 | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+			elif [ "${info:$i:1}" == ")" ]
+			then
+				echo left-shift 0 | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+			elif [ "${info:$i:1}" == "[" ]
+			then
+				echo lbracket | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+			elif [ "${info:$i:1}" == "]" ]
+			then
+				echo rbracket | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+			elif [ "${info:$i:1}" == "#" ]
+			then
+				echo left-shift 3 | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+			elif [ "${info:$i:1}" == "@" ]
+			then
+				echo left-shift 2 | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+			elif [ "${info:$i:1}" == "$" ]
+			then
+				echo left-shift 4 | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+			elif [ "${info:$i:1}" == "%" ]
+			then
+				echo left-shift 5 | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+			elif [ "${info:$i:1}" == "^" ]
+			then
+				echo left-shift 6 | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+			elif [ "${info:$i:1}" == "&" ]
+			then
+				echo left-shift 7 | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+			elif [ "${info:$i:1}" == "*" ]
+			then
+				echo kp-multiply | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
 
 			else
 				case ${info:$i:1} in
@@ -111,7 +148,7 @@ while IFS='' read -r line || [[ -n "$line" ]]; do
 
 	elif [ "$cmd" == "WINDOWS" -o "$cmd" == "GUI" ] 
 	then
-		echo left-meta $info | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+		echo left-meta ${info,,} | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
 
 	elif [ "$cmd" == "MENU" -o "$cmd" == "APP" ] 
 	then
@@ -192,6 +229,10 @@ while IFS='' read -r line || [[ -n "$line" ]]; do
 	elif [ "$cmd" == "TAB" ] 
 	then
 		echo tab | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+
+	elif [ "$cmd" == "REM" ] 
+	then
+		echo $info
 
 	#elif [ "$cmd" == "ALT" ] 
 	#then
