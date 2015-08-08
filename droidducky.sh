@@ -20,232 +20,255 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 defdelay=0
+kb="/dev/hidg0 keyboard"
 while IFS='' read -r line || [[ -n "$line" ]]; do
 	read -r cmd info <<< "$line"
 	if [ "$cmd" == "STRING" ] 
 	then
 		for ((  i=0; i<${#info}; i++  )); do
+			kbcode="";
+
 			if [ "${info:$i:1}" == " " ]
 			then
-				echo space | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+				kbcode='space'
 			elif [ "${info:$i:1}" == "!" ]
 			then
-				echo left-shift 1 | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+				kbcode='left-shift 1'
 			elif [ "${info:$i:1}" == "." ]
 			then
-				echo period | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+				kbcode='period'
 			elif [ "${info:$i:1}" == "\`" ]
 			then
-				echo backquote | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+				kbcode='backquote'
 			elif [ "${info:$i:1}" == "~" ]
 			then
-				echo left-shift tilde | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+				kbcode='left-shift tilde'
 			elif [ "${info:$i:1}" == "+" ]
 			then
-				echo kp-plus | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+				kbcode='kp-plus'
 			elif [ "${info:$i:1}" == "=" ]
 			then
-				echo equal | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+				kbcode='equal'
 			elif [ "${info:$i:1}" == "_" ]
 			then
-				echo left-shift minus | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+				kbcode='left-shift minus'
 			elif [ "${info:$i:1}" == "-" ]
 			then
-				echo minus | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+				kbcode='minus'
 			elif [ "${info:$i:1}" == "\"" ]
 			then
-				echo left-shift quote | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+				kbcode='left-shift quote'
 			elif [ "${info:$i:1}" == "'" ]
 			then
-				echo quote | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+				kbcode='quote'
 			elif [ "${info:$i:1}" == ":" ]
 			then
-				echo left-shift semicolon | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+				kbcode='left-shift semicolon'
 			elif [ "${info:$i:1}" == ";" ]
 			then
-				echo semicolon | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+				kbcode='semicolon'
 			elif [ "${info:$i:1}" == "<" ]
 			then
-				echo left-shift comma | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+				kbcode='left-shift comma'
 			elif [ "${info:$i:1}" == "," ]
 			then
-				echo comma | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+				kbcode='comma'
 			elif [ "${info:$i:1}" == ">" ]
 			then
-				echo left-shift period | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+				kbcode='left-shift period'
 			elif [ "${info:$i:1}" == "?" ]
 			then
-				echo left-shift slash | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+				kbcode='left-shift slash'
 			elif [ "${info:$i:1}" == "\\" ]
 			then
-				echo backslash | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+				kbcode='backslash'
 			elif [ "${info:$i:1}" == "|" ]
 			then
-				echo left-shift backslash | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+				kbcode='left-shift backslash'
 			elif [ "${info:$i:1}" == "/" ]
 			then
-				echo slash | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+				kbcode='slash'
 			elif [ "${info:$i:1}" == "{" ]
 			then
-				echo left-shift lbracket | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+				kbcode='left-shift lbracket'
 			elif [ "${info:$i:1}" == "}" ]
 			then
-				echo left-shift rbracket | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+				kbcode='left-shift rbracket'
 			elif [ "${info:$i:1}" == "(" ]
 			then
-				echo left-shift 9 | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+				kbcode='left-shift 9'
 			elif [ "${info:$i:1}" == ")" ]
 			then
-				echo left-shift 0 | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+				kbcode='left-shift 0'
 			elif [ "${info:$i:1}" == "[" ]
 			then
-				echo lbracket | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+				kbcode='lbracket'
 			elif [ "${info:$i:1}" == "]" ]
 			then
-				echo rbracket | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+				kbcode='rbracket'
 			elif [ "${info:$i:1}" == "#" ]
 			then
-				echo left-shift 3 | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+				kbcode='left-shift 3'
 			elif [ "${info:$i:1}" == "@" ]
 			then
-				echo left-shift 2 | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+				kbcode='left-shift 2'
 			elif [ "${info:$i:1}" == "$" ]
 			then
-				echo left-shift 4 | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+				kbcode='left-shift 4'
 			elif [ "${info:$i:1}" == "%" ]
 			then
-				echo left-shift 5 | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+				kbcode='left-shift 5'
 			elif [ "${info:$i:1}" == "^" ]
 			then
-				echo left-shift 6 | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+				kbcode='left-shift 6'
 			elif [ "${info:$i:1}" == "&" ]
 			then
-				echo left-shift 7 | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+				kbcode='left-shift 7'
 			elif [ "${info:$i:1}" == "*" ]
 			then
-				echo kp-multiply | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+				kbcode='kp-multiply'
 
 			else
 				case ${info:$i:1} in
 				[[:upper:]])
 					tmp=${info:$i:1}
-					echo left-shift ${tmp,,} | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+					kbcode="left-shift ${tmp,,}"
 					;;
 				*)
-					echo ${info:$i:1} | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+					kbcode="${info:$i:1}"
 					;;
 				esac
+			fi
+
+			if [ "$kbcode" != "" ]
+			then
+				echo "$kbcode" | ./hid-gadget-test $kb > /dev/null
 			fi
 		done
 	elif [ "$cmd" == "ENTER" ] 
 	then
-		echo enter | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+		echo enter | ./hid-gadget-test $kb > /dev/null
 	
 	elif [ "$cmd" == "DELAY" ] 
 	then
-		((info = $info*1000))
+		((info = info*1000))
 		usleep $info
 
 	elif [ "$cmd" == "WINDOWS" -o "$cmd" == "GUI" ] 
 	then
-		echo left-meta ${info,,} | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+		echo left-meta ${info,,} | ./hid-gadget-test $kb > /dev/null
 
 	elif [ "$cmd" == "MENU" -o "$cmd" == "APP" ] 
 	then
-		echo menu | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+		echo menu | ./hid-gadget-test $kb > /dev/null
 
 	elif [ "$cmd" == "DOWNARROW" -o "$cmd" == "DOWN" ] 
 	then
-		echo down | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+		echo down | ./hid-gadget-test $kb > /dev/null
 
 	elif [ "$cmd" == "LEFTARROW" -o "$cmd" == "LEFT" ] 
 	then
-		echo left | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+		echo left | ./hid-gadget-test $kb > /dev/null
 
 	elif [ "$cmd" == "RIGHTARROW" -o "$cmd" == "RIGHT" ] 
 	then
-		echo right | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+		echo right | ./hid-gadget-test $kb > /dev/null
 
 	elif [ "$cmd" == "UPARROW" -o "$cmd" == "UP" ] 
 	then
-		echo up | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+		echo up | ./hid-gadget-test $kb > /dev/null
 
 	elif [ "$cmd" == "DEFAULT_DELAY" -o "$cmd" == "DEFAULTDELAY" ] 
 	then
-		((defdelay = $info*1000))
+		((defdelay = info*1000))
 
 	elif [ "$cmd" == "BREAK" -o "$cmd" == "PAUSE" ] 
 	then
-		echo pause | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
-
-	elif [ "$cmd" == "CAPSLOCK" ] 
-	then
-		echo capslock | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
-
-	elif [ "$cmd" == "DELETE" ] 
-	then
-		echo delete | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
-
-	elif [ "$cmd" == "END" ] 
-	then
-		echo end | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+		echo pause | ./hid-gadget-test $kb > /dev/null
 
 	elif [ "$cmd" == "ESC" -o "$cmd" == "ESCAPE" ] 
 	then
-		echo escape | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
-
-	elif [ "$cmd" == "HOME" ] 
-	then
-		echo home | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
-
-	elif [ "$cmd" == "INSERT" ] 
-	then
-		echo insert | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
-
-	elif [ "$cmd" == "NUMLOCK" ] 
-	then
-		echo numlock | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
-
-	elif [ "$cmd" == "PAGEUP" ] 
-	then
-		echo pageup | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
-
-	elif [ "$cmd" == "PAGEDOWN" ] 
-	then
-		echo pagedown | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+		echo escape | ./hid-gadget-test $kb > /dev/null
 
 	elif [ "$cmd" == "PRINTSCREEN" ] 
 	then
-		echo print | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+		echo print | ./hid-gadget-test $kb > /dev/null
 
-	elif [ "$cmd" == "SCROLLLOCK" ] 
+	elif [ "$cmd" == "CAPSLOCK" -o "$cmd" == "DELETE" -o "$cmd" == "END" -o "$cmd" == "HOME" -o "$cmd" == "INSERT" -o "$cmd" == "NUMLOCK" -o "$cmd" == "PAGEUP" -o "$cmd" == "PAGEDOWN" -o "$cmd" == "SCROLLLOCK" -o "$cmd" == "SPACE" -o "$cmd" == "TAB" \
+	-o "$cmd" == "F1" -o "$cmd" == "F2" -o "$cmd" == "F3" -o "$cmd" == "F4" -o "$cmd" == "F5" -o "$cmd" == "F6" -o "$cmd" == "F7" -o "$cmd" == "F8" -o "$cmd" == "F9" -o "$cmd" == "F10" -o "$cmd" == "F11" -o "$cmd" == "F12" ] 
 	then
-		echo scrolllock | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
-
-	elif [ "$cmd" == "SPACE" ] 
-	then
-		echo space | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
-
-	elif [ "$cmd" == "TAB" ] 
-	then
-		echo tab | ./hid-gadget-test /dev/hidg0 keyboard > /dev/null
+		echo "${cmd,,}" | ./hid-gadget-test $kb > /dev/null
 
 	elif [ "$cmd" == "REM" ] 
 	then
-		echo $info
+		echo "$info"
 
-	#elif [ "$cmd" == "ALT" ] 
-	#then
-		# TODO: Implement ALT functionality
+	elif [ "$cmd" == "SHIFT" ] 
+	then
+		if [ "$info" == "DELETE" -o "$info" == "END" -o "$info" == "HOME" -o "$info" == "INSERT" -o "$info" == "PAGEUP" -o "$info" == "PAGEDOWN" -o "$info" == "SPACE" -o "$info" == "TAB" ] 
+		then
+			echo "left-shift ${info,,}" | ./hid-gadget-test $kb > /dev/null
 
-	#elif [ "$cmd" == "SHIFT" ] 
-	#then
-		# TODO: Implement SHIFT functionality
+		elif [ "$info" == *"WINDOWS"* -o "$info" == *"GUI"* ] 
+		then
+			read -r gui char <<< "$info"
+			echo "left-shift left-meta ${char,,}" | ./hid-gadget-test $kb > /dev/null
 
-	#elif [ "$cmd" == "CONTROL" -o "$cmd" == "CTRL" ] 
-	#then
-		# TODO: Implement CTRL functionality
+		elif [ "$info" == "DOWNARROW" -o "$info" == "DOWN" ] 
+		then
+			echo left-shift down | ./hid-gadget-test $kb > /dev/null
 
+		elif [ "$info" == "LEFTARROW" -o "$info" == "LEFT" ] 
+		then
+			echo left-shift left | ./hid-gadget-test $kb > /dev/null
+
+		elif [ "$info" == "RIGHTARROW" -o "$info" == "RIGHT" ] 
+		then
+			echo left-shift right | ./hid-gadget-test $kb > /dev/null
+
+		elif [ "$info" == "UPARROW" -o "$info" == "UP" ] 
+		then
+			echo left-shift up | ./hid-gadget-test $kb > /dev/null
+
+		else
+			echo "Parse error: $cmd $info"
+		fi
+
+	elif [ "$cmd" == "CONTROL" -o "$cmd" == "CTRL" ] 
+	then
+		if [ "$info" == "BREAK" -o "$info" == "PAUSE" ] 
+		then
+			echo left-ctrl pause | ./hid-gadget-test $kb > /dev/null
+
+		elif [ "$info" == "F1" -o "$info" == "F2" -o "$info" == "F3" -o "$info" == "F4" -o "$info" == "F5" -o "$info" == "F6" -o "$info" == "F7" -o "$info" == "F8" -o "$info" == "F9" -o "$info" == "F10" -o "$info" == "F11" -o "$info" == "F12" ] 
+		then
+			echo "left-ctrl ${cmd,,}" | ./hid-gadget-test $kb > /dev/null
+
+		elif [ "$info" == "ESC" -o "$info" == "ESCAPE" ] 
+		then
+			echo left-ctrl escape | ./hid-gadget-test $kb > /dev/null
+
+		else 
+			echo "left-ctrl ${info,,}" | ./hid-gadget-test $kb > /dev/null
+		fi
+
+	elif [ "$cmd" == "ALT" ] 
+	then
+		if [ "$info" == "END" -o "$info" == "SPACE" -o "$info" == "TAB" \
+		-o "$info" == "F1" -o "$info" == "F2" -o "$info" == "F3" -o "$info" == "F4" -o "$info" == "F5" -o "$info" == "F6" -o "$info" == "F7" -o "$info" == "F8" -o "$info" == "F9" -o "$info" == "F10" -o "$info" == "F11" -o "$info" == "F12" ] 
+		then
+			echo "left-alt ${info,,}" | ./hid-gadget-test $kb > /dev/null
+
+		elif [ "$info" == "ESC" -o "$info" == "ESCAPE" ] 
+		then
+			echo "left-alt escape" | ./hid-gadget-test $kb > /dev/null
+
+		else 
+			echo "left-alt ${info,,}" | ./hid-gadget-test $kb > /dev/null
+		fi
+
+	else
+		echo "Parse error: $cmd"
 	fi
 
 	usleep $defdelay
