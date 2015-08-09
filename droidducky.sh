@@ -248,6 +248,10 @@ while IFS='' read -r line || [[ -n "$line" ]]; do
 		then
 			echo left-ctrl escape | ./hid-gadget-test $kb > /dev/null
 
+		elif [ "$info" == "" ]
+		then
+			echo left-ctrl | ./hid-gadget-test $kb > /dev/null
+
 		else 
 			echo "left-ctrl ${info,,}" | ./hid-gadget-test $kb > /dev/null
 		fi
@@ -263,8 +267,60 @@ while IFS='' read -r line || [[ -n "$line" ]]; do
 		then
 			echo "left-alt escape" | ./hid-gadget-test $kb > /dev/null
 
+		elif [ "$info" == "" ]
+		then
+			echo left-alt | ./hid-gadget-test $kb > /dev/null
+
 		else 
 			echo "left-alt ${info,,}" | ./hid-gadget-test $kb > /dev/null
+		fi
+
+	elif [ "$cmd" == "ALT-SHIFT" ] 
+	then
+		echo left-shift left-alt | ./hid-gadget-test $kb > /dev/null
+
+	elif [ "$cmd" == "CTRL-ALT" ] 
+	then
+		if [ "$info" == "BREAK" -o "$info" == "PAUSE" ] 
+		then
+			echo left-ctrl left-alt pause | ./hid-gadget-test $kb > /dev/null
+
+		elif [ "$info" == "END" -o "$info" == "SPACE" -o "$info" == "TAB" -o "$info" == "DELETE" -o "$info" == "F1" -o "$info" == "F2" -o "$info" == "F3" -o "$info" == "F4" -o "$info" == "F5" -o "$info" == "F6" -o "$info" == "F7" -o "$info" == "F8" -o "$info" == "F9" -o "$info" == "F10" -o "$info" == "F11" -o "$info" == "F12" ] 
+		then
+			echo "left-ctrl left-alt ${cmd,,}" | ./hid-gadget-test $kb > /dev/null
+
+		elif [ "$info" == "ESC" -o "$info" == "ESCAPE" ] 
+		then
+			echo left-ctrl left-alt escape | ./hid-gadget-test $kb > /dev/null
+
+		elif [ "$info" == "" ]
+		then
+			echo left-ctrl left-alt | ./hid-gadget-test $kb > /dev/null
+
+		else 
+			echo "left-ctrl left-alt ${info,,}" | ./hid-gadget-test $kb > /dev/null
+		fi
+
+	elif [ "$cmd" == "CTRL-SHIFT" ] 
+	then
+		if [ "$info" == "BREAK" -o "$info" == "PAUSE" ] 
+		then
+			echo left-ctrl left-shift pause | ./hid-gadget-test $kb > /dev/null
+
+		elif [ "$info" == "END" -o "$info" == "SPACE" -o "$info" == "TAB" -o "$info" == "DELETE" -o "$info" == "F1" -o "$info" == "F2" -o "$info" == "F3" -o "$info" == "F4" -o "$info" == "F5" -o "$info" == "F6" -o "$info" == "F7" -o "$info" == "F8" -o "$info" == "F9" -o "$info" == "F10" -o "$info" == "F11" -o "$info" == "F12" ] 
+		then
+			echo "left-ctrl left-shift ${cmd,,}" | ./hid-gadget-test $kb > /dev/null
+
+		elif [ "$info" == "ESC" -o "$info" == "ESCAPE" ] 
+		then
+			echo left-ctrl left-shift escape | ./hid-gadget-test $kb > /dev/null
+
+		elif [ "$info" == "" ]
+		then
+			echo left-ctrl left-shift | ./hid-gadget-test $kb > /dev/null
+
+		else 
+			echo "left-ctrl left-shift ${info,,}" | ./hid-gadget-test $kb > /dev/null
 		fi
 
 	else
