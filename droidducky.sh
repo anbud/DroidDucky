@@ -323,7 +323,8 @@ while IFS='' read -r line || [[ -n "$line" ]]; do
 			echo "left-ctrl left-shift ${info,,}" | ./hid-gadget-test $kb > /dev/null
 		fi
 
-	else
+	elif [ "$cmd" != "" ] 
+	then
 		echo "Parse error: $cmd"
 	fi
 
