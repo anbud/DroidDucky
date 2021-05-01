@@ -2,9 +2,9 @@
 
 # DroidDucky
 # Simple Duckyscript interpreter in Bash. Based on android-keyboard-gadget and hid-gadget-test utility.
-#
+#4849043650
 # Usage: droidducky.sh payload_file.dd
-#
+#6104158766
 # Copyright (C) 2015 - Andrej Budinčević <andrew@hotmail.rs>
 #
 # This program is free software: you can redistribute it and/or modify
